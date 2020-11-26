@@ -1,0 +1,35 @@
+{
+  "name": "ano-it-com/ims-bundle",
+  "version": "0.1.0",
+  "description": "Incident management system bundle",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "AUTONOMOUS NONPROFIT ORGANIZATION \"RESEARCH CENTER\" INFORMATION TECHNOLOGIES",
+      "homepage": "https://github.com/ano-it-com/"
+    }
+  ],
+  "require": {
+    "php": "^7.3"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "ANOITCOM\\IMSBundle\\": "src"
+    }
+  },
+  "scripts": {
+    "test": "./vendor/bin/simple-phpunit"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "5.1.*"
+    }
+  }
+}

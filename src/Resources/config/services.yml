@@ -1,0 +1,56 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  ANOITCOM\IMSBundle\:
+    resource: '../../*'
+    exclude: ['../../{DependencyInjection,Resources,Entity,IMSBundle.php}', '../../**/*Exception.php', '../../**/*DTO.php']
+
+  _instanceof:
+    # Add the console.command tag to all services defined in this file having this type
+    ANOITCOM\IMSBundle\Domain\Incident\Status\IncidentStatusInterface:
+      tags: [ 'incident.status' ]
+      lazy: true
+
+    ANOITCOM\IMSBundle\Domain\Incident\Action\Status\ActionStatusInterface:
+      tags: [ 'action.status' ]
+      lazy: true
+
+    ANOITCOM\IMSBundle\Domain\Incident\Action\ActionTask\Status\ActionTaskStatusInterface:
+      tags: [ 'action.task.status' ]
+      lazy: true
+
+    ANOITCOM\IMSBundle\Domain\Incident\Action\Types\ActionTypeInterface:
+      tags: [ 'action.type' ]
+      lazy: true
+
+    ANOITCOM\IMSBundle\Domain\Incident\Action\ActionTask\Types\ActionTaskTypeInterface:
+      tags: [ 'action.task.type' ]
+      lazy: true
+
+  ANOITCOM\IMSBundle\Domain\Incident\Status\IncidentStatusList:
+    arguments:
+      $locator: !tagged_locator { tag: 'incident.status', index_by: 'key', default_index_method: 'getCode' }
+
+  ANOITCOM\IMSBundle\Domain\Incident\Action\Status\ActionStatusList:
+    arguments:
+      $locator: !tagged_locator { tag: 'action.status', index_by: 'key', default_index_method: 'getCode' }
+
+  ANOITCOM\IMSBundle\Domain\Incident\Action\ActionTask\Status\ActionTaskStatusList:
+    arguments:
+      $locator: !tagged_locator { tag: 'action.task.status', index_by: 'key', default_index_method: 'getCode' }
+
+  ANOITCOM\IMSBundle\Domain\Incident\Action\ActionTask\Types\ActionTaskTypeList:
+    arguments:
+      $locator: !tagged_locator { tag: 'action.task.type', index_by: 'key', default_index_method: 'getCode' }
+
+  ANOITCOM\IMSBundle\Domain\Incident\Action\Types\ActionTypeList:
+    arguments:
+      $locator: !tagged_locator { tag: 'action.type', index_by: 'key', default_index_method: 'getCode' }
+
+
+  ANOITCOM\IMSBundle\Infrastructure\Exceptions\JsonExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
